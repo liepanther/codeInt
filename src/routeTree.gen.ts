@@ -9,53 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VerifyRouteImport } from './routes/verify'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as InternshipsRouteImport } from './routes/internships'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as ApplyRouteImport } from './routes/apply'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ApplyRouteImport } from './routes/apply'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as InternshipsRouteImport } from './routes/internships'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as InternshipsIndexRouteImport } from './routes/internships.index'
-import { Route as RecruiterPostingsRouteImport } from './routes/recruiter.postings'
-import { Route as RecruiterNewRouteImport } from './routes/recruiter.new'
-import { Route as RecruiterCertificatesRouteImport } from './routes/recruiter.certificates'
-import { Route as RecruiterApplicationsRouteImport } from './routes/recruiter.applications'
-import { Route as MyResumeRouteImport } from './routes/my.resume'
-import { Route as MyOffersRouteImport } from './routes/my.offers'
-import { Route as MyCertificatesRouteImport } from './routes/my.certificates'
-import { Route as MyApplicationsRouteImport } from './routes/my.applications'
 import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
+import { Route as MyApplicationsRouteImport } from './routes/my.applications'
+import { Route as MyCertificatesRouteImport } from './routes/my.certificates'
+import { Route as MyOffersRouteImport } from './routes/my.offers'
+import { Route as MyResumeRouteImport } from './routes/my.resume'
+import { Route as RecruiterApplicationsRouteImport } from './routes/recruiter.applications'
+import { Route as RecruiterCertificatesRouteImport } from './routes/recruiter.certificates'
+import { Route as RecruiterNewRouteImport } from './routes/recruiter.new'
+import { Route as RecruiterPostingsRouteImport } from './routes/recruiter.postings'
 
-const VerifyRoute = VerifyRouteImport.update({
-  id: '/verify',
-  path: '/verify',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InternshipsRoute = InternshipsRouteImport.update({
-  id: '/internships',
-  path: '/internships',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApplyRoute = ApplyRouteImport.update({
-  id: '/apply',
-  path: '/apply',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -63,9 +38,34 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ApplyRoute = ApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternshipsRoute = InternshipsRouteImport.update({
+  id: '/internships',
+  path: '/internships',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InternshipsIndexRoute = InternshipsIndexRouteImport.update({
@@ -73,34 +73,14 @@ const InternshipsIndexRoute = InternshipsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => InternshipsRoute,
 } as any)
-const RecruiterPostingsRoute = RecruiterPostingsRouteImport.update({
-  id: '/recruiter/postings',
-  path: '/recruiter/postings',
-  getParentRoute: () => rootRouteImport,
+const InternshipsIdRoute = InternshipsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => InternshipsRoute,
 } as any)
-const RecruiterNewRoute = RecruiterNewRouteImport.update({
-  id: '/recruiter/new',
-  path: '/recruiter/new',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RecruiterCertificatesRoute = RecruiterCertificatesRouteImport.update({
-  id: '/recruiter/certificates',
-  path: '/recruiter/certificates',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RecruiterApplicationsRoute = RecruiterApplicationsRouteImport.update({
-  id: '/recruiter/applications',
-  path: '/recruiter/applications',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MyResumeRoute = MyResumeRouteImport.update({
-  id: '/my/resume',
-  path: '/my/resume',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MyOffersRoute = MyOffersRouteImport.update({
-  id: '/my/offers',
-  path: '/my/offers',
+const MyApplicationsRoute = MyApplicationsRouteImport.update({
+  id: '/my/applications',
+  path: '/my/applications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MyCertificatesRoute = MyCertificatesRouteImport.update({
@@ -108,15 +88,35 @@ const MyCertificatesRoute = MyCertificatesRouteImport.update({
   path: '/my/certificates',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MyApplicationsRoute = MyApplicationsRouteImport.update({
-  id: '/my/applications',
-  path: '/my/applications',
+const MyOffersRoute = MyOffersRouteImport.update({
+  id: '/my/offers',
+  path: '/my/offers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InternshipsIdRoute = InternshipsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => InternshipsRoute,
+const MyResumeRoute = MyResumeRouteImport.update({
+  id: '/my/resume',
+  path: '/my/resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecruiterApplicationsRoute = RecruiterApplicationsRouteImport.update({
+  id: '/recruiter/applications',
+  path: '/recruiter/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecruiterCertificatesRoute = RecruiterCertificatesRouteImport.update({
+  id: '/recruiter/certificates',
+  path: '/recruiter/certificates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecruiterNewRoute = RecruiterNewRouteImport.update({
+  id: '/recruiter/new',
+  path: '/recruiter/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecruiterPostingsRoute = RecruiterPostingsRouteImport.update({
+  id: '/recruiter/postings',
+  path: '/recruiter/postings',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -262,46 +262,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/verify': {
-      id: '/verify'
-      path: '/verify'
-      fullPath: '/verify'
-      preLoaderRoute: typeof VerifyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/internships': {
-      id: '/internships'
-      path: '/internships'
-      fullPath: '/internships'
-      preLoaderRoute: typeof InternshipsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/apply': {
-      id: '/apply'
-      path: '/apply'
-      fullPath: '/apply'
-      preLoaderRoute: typeof ApplyRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -311,11 +276,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/apply': {
+      id: '/apply'
+      path: '/apply'
+      fullPath: '/apply'
+      preLoaderRoute: typeof ApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internships': {
+      id: '/internships'
+      path: '/internships'
+      fullPath: '/internships'
+      preLoaderRoute: typeof InternshipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/internships/': {
@@ -325,46 +325,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InternshipsIndexRouteImport
       parentRoute: typeof InternshipsRoute
     }
-    '/recruiter/postings': {
-      id: '/recruiter/postings'
-      path: '/recruiter/postings'
-      fullPath: '/recruiter/postings'
-      preLoaderRoute: typeof RecruiterPostingsRouteImport
-      parentRoute: typeof rootRouteImport
+    '/internships/$id': {
+      id: '/internships/$id'
+      path: '/$id'
+      fullPath: '/internships/$id'
+      preLoaderRoute: typeof InternshipsIdRouteImport
+      parentRoute: typeof InternshipsRoute
     }
-    '/recruiter/new': {
-      id: '/recruiter/new'
-      path: '/recruiter/new'
-      fullPath: '/recruiter/new'
-      preLoaderRoute: typeof RecruiterNewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/recruiter/certificates': {
-      id: '/recruiter/certificates'
-      path: '/recruiter/certificates'
-      fullPath: '/recruiter/certificates'
-      preLoaderRoute: typeof RecruiterCertificatesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/recruiter/applications': {
-      id: '/recruiter/applications'
-      path: '/recruiter/applications'
-      fullPath: '/recruiter/applications'
-      preLoaderRoute: typeof RecruiterApplicationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/my/resume': {
-      id: '/my/resume'
-      path: '/my/resume'
-      fullPath: '/my/resume'
-      preLoaderRoute: typeof MyResumeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/my/offers': {
-      id: '/my/offers'
-      path: '/my/offers'
-      fullPath: '/my/offers'
-      preLoaderRoute: typeof MyOffersRouteImport
+    '/my/applications': {
+      id: '/my/applications'
+      path: '/my/applications'
+      fullPath: '/my/applications'
+      preLoaderRoute: typeof MyApplicationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/my/certificates': {
@@ -374,19 +346,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MyCertificatesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/my/applications': {
-      id: '/my/applications'
-      path: '/my/applications'
-      fullPath: '/my/applications'
-      preLoaderRoute: typeof MyApplicationsRouteImport
+    '/my/offers': {
+      id: '/my/offers'
+      path: '/my/offers'
+      fullPath: '/my/offers'
+      preLoaderRoute: typeof MyOffersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/internships/$id': {
-      id: '/internships/$id'
-      path: '/$id'
-      fullPath: '/internships/$id'
-      preLoaderRoute: typeof InternshipsIdRouteImport
-      parentRoute: typeof InternshipsRoute
+    '/my/resume': {
+      id: '/my/resume'
+      path: '/my/resume'
+      fullPath: '/my/resume'
+      preLoaderRoute: typeof MyResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recruiter/applications': {
+      id: '/recruiter/applications'
+      path: '/recruiter/applications'
+      fullPath: '/recruiter/applications'
+      preLoaderRoute: typeof RecruiterApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recruiter/certificates': {
+      id: '/recruiter/certificates'
+      path: '/recruiter/certificates'
+      fullPath: '/recruiter/certificates'
+      preLoaderRoute: typeof RecruiterCertificatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recruiter/new': {
+      id: '/recruiter/new'
+      path: '/recruiter/new'
+      fullPath: '/recruiter/new'
+      preLoaderRoute: typeof RecruiterNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recruiter/postings': {
+      id: '/recruiter/postings'
+      path: '/recruiter/postings'
+      fullPath: '/recruiter/postings'
+      preLoaderRoute: typeof RecruiterPostingsRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }

@@ -58,13 +58,13 @@ export function VerifyPage() {
   }, []);
 
   const executeSearch = async (searchTerm: string) => {
-    const clean = searchTerm.trim().toUpperCase();
-    if (!clean) return;
+    const raw = searchTerm.trim();
+    if (!raw) return;
     setLoading(true);
     setShowDocPreview(false);
 
-    // 1. Try finding Certificate first (in local application store)
-    const cert = await findStudentCertificate(clean);
+    // 1. Try finding Certificate first
+    const cert = await findStudentCertificate(raw);
     if (cert) {
       setResultType("certificate");
       setResult(cert);
@@ -72,55 +72,13 @@ export function VerifyPage() {
       return;
     }
 
-    // 2. Try finding Offer Letter (in local application store)
-    const offer = await findStudentOffer(clean);
+    // 2. Try finding Offer Letter
+    const offer = await findStudentOffer(raw);
     if (offer) {
       setResultType("offer");
       setResult(offer);
       setLoading(false);
       return;
-    }
-
-    // 3. Fallback query direct in Supabase certificates
-    try {
-      const cleanQ = clean.replace(/[^A-Z0-9_-]/g, "");
-      if (cleanQ) {
-        const { data } = await supabase
-          .from("certificates")
-          .select("*, internship:internships(location, work_mode)")
-          .or(`cert_code.eq.${cleanQ},id.eq.${cleanQ}`)
-          .maybeSingle();
-
-        if (data) {
-          setResultType("certificate");
-          setResult(data);
-          setLoading(false);
-          return;
-        }
-      }
-    } catch (e) {
-      console.warn("Direct certificate search error:", e);
-    }
-
-    // 4. Fallback query direct in Supabase offer_letters
-    try {
-      const cleanQ = clean.replace(/[^A-Z0-9_-]/g, "");
-      if (cleanQ) {
-        const { data } = await supabase
-          .from("offer_letters")
-          .select("*")
-          .or(`offer_code.eq.${cleanQ},id.eq.${cleanQ}`)
-          .maybeSingle();
-
-        if (data) {
-          setResultType("offer");
-          setResult(data);
-          setLoading(false);
-          return;
-        }
-      }
-    } catch (e) {
-      console.warn("Direct offer search error:", e);
     }
 
     setResult("notfound");

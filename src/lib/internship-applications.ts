@@ -511,16 +511,17 @@ export async function fetchAllCertificates(): Promise<any[]> {
 }
 
 export async function findStudentOffer(query: string): Promise<any | null> {
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
   if (!q) return null;
+  const qLower = q.toLowerCase();
 
   // 1. Search local storage
   const localOffers = getStoredOffers();
   const localMatch = localOffers.find(
     (o) =>
-      (o.offer_code && o.offer_code.toLowerCase() === q) ||
-      (o.student_name && o.student_name.toLowerCase().includes(q)) ||
-      (o.student_id && o.student_id.toLowerCase() === q)
+      (o.offer_code && o.offer_code.toLowerCase() === qLower) ||
+      (o.student_name && o.student_name.toLowerCase().includes(qLower)) ||
+      (o.student_id && o.student_id.toLowerCase() === qLower)
   );
   if (localMatch) return localMatch;
 
@@ -529,24 +530,24 @@ export async function findStudentOffer(query: string): Promise<any | null> {
   const appMatch = localApps.find(
     (a) =>
       a.offer_letter &&
-      (a.email.toLowerCase() === q ||
-        a.full_name.toLowerCase() === q ||
-        a.ref_code.toLowerCase() === q)
+      (a.email?.toLowerCase() === qLower ||
+        a.full_name?.toLowerCase().includes(qLower) ||
+        a.ref_code?.toLowerCase() === qLower)
   );
   if (appMatch?.offer_letter) return appMatch.offer_letter;
 
   // 2. Search Supabase offer_letters table
   try {
-    const cleanQ = q.replace(/[^a-z0-9_-]/g, "");
-    if (cleanQ) {
-      const { data } = await supabase
-        .from("offer_letters")
-        .select("*")
-        .or(`offer_code.eq.${cleanQ.toUpperCase()},id.eq.${cleanQ}`)
-        .limit(1);
-
-      if (data && data.length > 0) return data[0];
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(q);
+    let builder = supabase.from("offer_letters").select("*");
+    if (isUuid) {
+      builder = builder.or(`id.eq.${q},offer_code.ilike.%${q}%,student_name.ilike.%${q}%`);
+    } else {
+      builder = builder.or(`offer_code.ilike.%${q}%,student_name.ilike.%${q}%`);
     }
+
+    const { data } = await builder.limit(1);
+    if (data && data.length > 0) return data[0];
   } catch (err) {
     console.warn("Supabase offer search error:", err);
   }
@@ -555,30 +556,32 @@ export async function findStudentOffer(query: string): Promise<any | null> {
 }
 
 export async function findStudentCertificate(query: string): Promise<any | null> {
-  const q = query.trim().toLowerCase();
+  const q = query.trim();
   if (!q) return null;
+  const qLower = q.toLowerCase();
 
   // 1. Search local storage first
   const localCerts = getStoredCertificates();
   const localMatch = localCerts.find(
     (c: any) =>
-      (c.cert_code && c.cert_code.toLowerCase() === q) ||
-      (c.id && c.id.toLowerCase() === q)
+      (c.cert_code && c.cert_code.toLowerCase() === qLower) ||
+      (c.student_name && c.student_name.toLowerCase().includes(qLower)) ||
+      (c.id && c.id.toLowerCase() === qLower)
   );
   if (localMatch) return localMatch;
 
   // 2. Search Supabase certificates table
   try {
-    const cleanQ = q.replace(/[^a-z0-9_-]/g, "");
-    if (cleanQ) {
-      const { data } = await supabase
-        .from("certificates")
-        .select("*")
-        .or(`cert_code.eq.${cleanQ.toUpperCase()},id.eq.${cleanQ}`)
-        .limit(1);
-
-      if (data && data.length > 0) return data[0];
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(q);
+    let builder = supabase.from("certificates").select("*");
+    if (isUuid) {
+      builder = builder.or(`id.eq.${q},cert_code.ilike.%${q}%,student_name.ilike.%${q}%`);
+    } else {
+      builder = builder.or(`cert_code.ilike.%${q}%,student_name.ilike.%${q}%`);
     }
+
+    const { data } = await builder.limit(1);
+    if (data && data.length > 0) return data[0];
   } catch (err) {
     console.warn("Supabase certificate search error:", err);
   }
